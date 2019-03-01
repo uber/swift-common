@@ -25,7 +25,7 @@ open class AbstractCommand: Command {
     public let name: String
 
     /// The default value for waiting timeout in seconds.
-    public let defaultTimeout = 30.0
+    public let defaultTimeout: TimeInterval = 30.0
 
     /// Initializer.
     ///
