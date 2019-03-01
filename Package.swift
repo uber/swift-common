@@ -25,6 +25,12 @@ let package = Package(
             exclude: [
                 "Fixtures",
             ]),
+        .target(
+            name: "CommandFramework",
+            dependencies: [
+                "Utility",
+                "SourceParsingFramework",
+            ]),
     ],
     swiftLanguageVersions: [4]
 )
