@@ -5,6 +5,7 @@ let package = Package(
     name: "Swift-Common",
     products: [
         .library(name: "SourceParsingFramework", targets: ["SourceParsingFramework"]),
+        .library(name: "CommandFramework", targets: ["CommandFramework"]),
     ],
     dependencies: [
         .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.20.0"),
