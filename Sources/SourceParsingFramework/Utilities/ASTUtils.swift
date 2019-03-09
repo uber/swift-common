@@ -17,6 +17,21 @@
 import Foundation
 import SourceKittenFramework
 
+/// The different types of AST structures.
+public enum ASTType {
+    case unknown
+    case `class`
+    case `struct`
+    case `protocol`
+    case method
+    case expressionCall
+    case parameter
+    /// A property that can either be a `var` or `let`.
+    case property
+    /// A global property that can either be a `var` or `let`.
+    case globalProperty
+}
+
 /// Extension of SourceKitten `Structure` to provide easy access to a set
 /// of common AST properties.
 public extension Structure {
@@ -39,6 +54,29 @@ public extension Structure {
     public var name: String {
         /// The type name of this structure.
         return dictionary["key.name"] as! String
+    }
+
+    /// The type of this structure.
+    public var type: ASTType {
+        if let kindString = dictionary["key.kind"] as? String {
+            switch kindString {
+            case "source.lang.swift.decl.class": return .class
+            case "source.lang.swift.decl.struct": return .struct
+            case "source.lang.swift.decl.protocol": return .protocol
+            case "source.lang.swift.decl.function.method.instance": return .method
+            case "source.lang.swift.expr.call": return .expressionCall
+            case "source.lang.swift.decl.var.parameter": return .parameter
+            case "source.lang.swift.decl.var.instance": return .property
+            case "source.lang.swift.decl.var.global": return .globalProperty
+            default: return .unknown
+            }
+        }
+        return .unknown
+    }
+
+    /// The return type of a property of method.
+    public var returnType: String {
+        return dictionary["key.typename"] as! String
     }
 
     /// The unique set of expression call types in this structure.
