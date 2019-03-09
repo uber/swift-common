@@ -11,7 +11,7 @@
 
 ## Overview
 
-Swift-Common contains reusabe modules shared among a number of Uber's Swift open source projects, such as [Needle](https://github.com/uber/needle), [Swift Abstract Class](https://github.com/uber/swift-abstract-class) and etc. This code is not specifically designed for external consumption beyond Uber's open source projects. However, it is certainly possible for other projects to depend on these libraries.
+Swift-Common contains reusable modules shared among a number of Uber's Swift open source projects, such as [Needle](https://github.com/uber/needle), [Swift Abstract Class](https://github.com/uber/swift-abstract-class) and etc. This code is not specifically designed for external consumption beyond Uber's open source projects. However, it is certainly possible for other projects to depend on these libraries.
 
 ### SourceParsingFramework
 
