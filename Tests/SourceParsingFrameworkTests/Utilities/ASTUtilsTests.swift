@@ -38,33 +38,33 @@ class ASTUtilsTests: AbstractSourceParsingTests {
         let structure = self.structure(for: "Types.swift")
 
         let myClass = structure.substructures[0]
-        XCTAssertEqual(myClass.type, ASTType.class)
+        XCTAssertEqual(myClass.type, SwiftDeclarationKind.class)
         XCTAssertEqual(myClass.name, "MyClass")
-        XCTAssertEqual(myClass.substructures[0].type, ASTType.property)
+        XCTAssertEqual(myClass.substructures[0].type, SwiftDeclarationKind.varInstance)
         XCTAssertEqual(myClass.substructures[0].name, "a")
-        XCTAssertEqual(myClass.substructures[1].type, ASTType.property)
+        XCTAssertEqual(myClass.substructures[1].type, SwiftDeclarationKind.varInstance)
         XCTAssertEqual(myClass.substructures[1].name, "myOtherProperty")
         XCTAssertEqual(myClass.substructures[1].returnType, "Int")
-        XCTAssertEqual(myClass.substructures[2].type, ASTType.expressionCall)
+        XCTAssertTrue(myClass.substructures[2].isExpressionCall)
         XCTAssertEqual(myClass.substructures[2].name, "someMethod")
-        XCTAssertEqual(myClass.substructures[3].type, ASTType.method)
+        XCTAssertEqual(myClass.substructures[3].type, SwiftDeclarationKind.functionMethodInstance)
         XCTAssertEqual(myClass.substructures[3].name, "myMethod(_:arg2:_:)")
         XCTAssertEqual(myClass.substructures[3].returnType, "String")
 
         let myProtocol = structure.substructures[1]
-        XCTAssertEqual(myProtocol.type, ASTType.protocol)
+        XCTAssertEqual(myProtocol.type, SwiftDeclarationKind.protocol)
         XCTAssertEqual(myProtocol.name, "MyProtocol")
 
         let myStruct = structure.substructures[2]
-        XCTAssertEqual(myStruct.type, ASTType.struct)
+        XCTAssertEqual(myStruct.type, SwiftDeclarationKind.struct)
         XCTAssertEqual(myStruct.name, "MyStruct")
 
         let myGlobalLet = structure.substructures[3]
-        XCTAssertEqual(myGlobalLet.type, ASTType.globalProperty)
+        XCTAssertEqual(myGlobalLet.type, SwiftDeclarationKind.varGlobal)
         XCTAssertEqual(myGlobalLet.name, "globalLet")
 
         let myGlobalVar = structure.substructures[4]
-        XCTAssertEqual(myGlobalVar.type, ASTType.globalProperty)
+        XCTAssertEqual(myGlobalVar.type, SwiftDeclarationKind.varGlobal)
         XCTAssertEqual(myGlobalVar.name, "globalVar")
     }
 

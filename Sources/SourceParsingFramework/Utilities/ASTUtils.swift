@@ -17,21 +17,6 @@
 import Foundation
 import SourceKittenFramework
 
-/// The different types of AST structures.
-public enum ASTType {
-    case unknown
-    case `class`
-    case `struct`
-    case `protocol`
-    case method
-    case expressionCall
-    case parameter
-    /// A property that can either be a `var` or `let`.
-    case property
-    /// A global property that can either be a `var` or `let`.
-    case globalProperty
-}
-
 /// Extension of SourceKitten `Structure` to provide easy access to a set
 /// of common AST properties.
 public extension Structure {
@@ -57,21 +42,61 @@ public extension Structure {
     }
 
     /// The type of this structure.
-    public var type: ASTType {
+    public var type: SwiftDeclarationKind? {
         if let kindString = dictionary["key.kind"] as? String {
             switch kindString {
-            case "source.lang.swift.decl.class": return .class
-            case "source.lang.swift.decl.struct": return .struct
-            case "source.lang.swift.decl.protocol": return .protocol
-            case "source.lang.swift.decl.function.method.instance": return .method
-            case "source.lang.swift.expr.call": return .expressionCall
-            case "source.lang.swift.decl.var.parameter": return .parameter
-            case "source.lang.swift.decl.var.instance": return .property
-            case "source.lang.swift.decl.var.global": return .globalProperty
-            default: return .unknown
+            case SwiftDeclarationKind.associatedtype.rawValue: return .associatedtype
+            case SwiftDeclarationKind.class.rawValue: return .class
+            case SwiftDeclarationKind.enum.rawValue: return .enum
+            case SwiftDeclarationKind.enumcase.rawValue: return .enumcase
+            case SwiftDeclarationKind.enumelement.rawValue: return .enumelement
+            case SwiftDeclarationKind.extension.rawValue: return .extension
+            case SwiftDeclarationKind.extensionClass.rawValue: return .extensionClass
+            case SwiftDeclarationKind.extensionEnum.rawValue: return .extensionEnum
+            case SwiftDeclarationKind.extensionProtocol.rawValue: return .extensionProtocol
+            case SwiftDeclarationKind.extensionStruct.rawValue: return .extensionStruct
+            case SwiftDeclarationKind.functionAccessorAddress.rawValue: return .functionAccessorAddress
+            case SwiftDeclarationKind.functionAccessorDidset.rawValue: return .functionAccessorDidset
+            case SwiftDeclarationKind.functionAccessorGetter.rawValue: return .functionAccessorGetter
+            case SwiftDeclarationKind.functionAccessorMutableaddress.rawValue: return .functionAccessorMutableaddress
+            case SwiftDeclarationKind.functionAccessorSetter.rawValue: return .functionAccessorSetter
+            case SwiftDeclarationKind.functionAccessorWillset.rawValue: return .functionAccessorWillset
+            case SwiftDeclarationKind.functionConstructor.rawValue: return .functionConstructor
+            case SwiftDeclarationKind.functionDestructor.rawValue: return .functionDestructor
+            case SwiftDeclarationKind.functionFree.rawValue: return .functionFree
+            case SwiftDeclarationKind.functionMethodClass.rawValue: return .functionMethodClass
+            case SwiftDeclarationKind.functionMethodInstance.rawValue: return .functionMethodInstance
+            case SwiftDeclarationKind.functionMethodStatic.rawValue: return .functionMethodStatic
+            case SwiftDeclarationKind.functionOperator.rawValue: return .functionOperator
+            case SwiftDeclarationKind.functionOperatorInfix.rawValue: return .functionOperatorInfix
+            case SwiftDeclarationKind.functionOperatorPostfix.rawValue: return .functionOperatorPostfix
+            case SwiftDeclarationKind.functionOperatorPrefix.rawValue: return .functionOperatorPrefix
+            case SwiftDeclarationKind.functionSubscript.rawValue: return .functionSubscript
+            case SwiftDeclarationKind.genericTypeParam.rawValue: return .genericTypeParam
+            case SwiftDeclarationKind.module.rawValue: return .module
+            case SwiftDeclarationKind.precedenceGroup.rawValue: return .precedenceGroup
+            case SwiftDeclarationKind.protocol.rawValue: return .protocol
+            case SwiftDeclarationKind.struct.rawValue: return .struct
+            case SwiftDeclarationKind.typealias.rawValue: return .typealias
+            case SwiftDeclarationKind.varClass.rawValue: return .varClass
+            case SwiftDeclarationKind.varGlobal.rawValue: return .varGlobal
+            case SwiftDeclarationKind.varInstance.rawValue: return .varInstance
+            case SwiftDeclarationKind.varLocal.rawValue: return .varLocal
+            case SwiftDeclarationKind.varParameter.rawValue: return .varParameter
+            case SwiftDeclarationKind.varStatic.rawValue: return .varStatic
+            default: return nil
             }
         }
-        return .unknown
+        return nil
+    }
+
+    /// If this structure is an expression call.
+    // This isn't a type in `SwiftDeclarationKind`.
+    public var isExpressionCall: Bool {
+        guard let kindString = dictionary["key.kind"] as? String else {
+            return false
+        }
+        return kindString == "source.lang.swift.expr.call"
     }
 
     /// The return type of a property of method.
