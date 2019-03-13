@@ -118,10 +118,10 @@ public class FileEnumerator {
 
     private func perLineFilePaths(from content: String) -> [String] {
         return content
-            .split(separator: "\n")
-            .compactMap { (substring: Substring) -> String? in
-                let string = String(substring).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                return string.isEmpty ? nil : string
+            .components(separatedBy: "\n")
+            .compactMap { (string: String) -> String? in
+                let trimmedString = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                return trimmedString.isEmpty ? nil : trimmedString
             }
     }
 
@@ -131,7 +131,7 @@ public class FileEnumerator {
         let mixedLines = content
             .replacingOccurrences(of: " '", with: "\n'")
             .replacingOccurrences(of: "' ", with: "'\n")
-            .split(separator: "\n")
+            .components(separatedBy: "\n")
 
         var paths = [String]()
         for line in mixedLines {
@@ -145,9 +145,9 @@ public class FileEnumerator {
             // Otherwise the line is a set of paths separated by spaces.
             else {
                 let nonEscapedPaths = line
-                    .split(separator: " ")
-                    .compactMap { (substring: Substring) -> String? in
-                        let path = String(substring).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    .components(separatedBy: " ")
+                    .compactMap { (string: String) -> String? in
+                        let path = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                         return path.isEmpty ? nil : path
                     }
                 paths.append(contentsOf: nonEscapedPaths)
