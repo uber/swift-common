@@ -42,4 +42,15 @@ class ExtensionsTests: AbstractSourceParsingTests {
         let dirUrl = URL(path: dirPath)
         XCTAssertFalse(dirUrl.isFileURL)
     }
+
+    func test_sequence_isAnyElementInSet() {
+        let array = [1, 42, 491, 10]
+        let set1 = Set<Int>([42])
+
+        XCTAssertTrue(array.isAnyElement(in: set1))
+
+        let set2 = Set<Int>([41])
+
+        XCTAssertFalse(array.isAnyElement(in: set2))
+    }
 }
