@@ -34,7 +34,7 @@ class ASTUtilsTests: AbstractSourceParsingTests {
         XCTAssertEqual(types, ["SuperClass<Blah,Foo,Bar>"])
     }
 
-    func test_type_name_verifyResults() {
+    func test_type_name_returnType_verifyResults() {
         let structure = self.structure(for: "Types.swift")
 
         let myClass = structure.substructures[0]
@@ -50,6 +50,9 @@ class ASTUtilsTests: AbstractSourceParsingTests {
         XCTAssertEqual(myClass.substructures[3].type, SwiftDeclarationKind.functionMethodInstance)
         XCTAssertEqual(myClass.substructures[3].name, "myMethod(_:arg2:_:)")
         XCTAssertEqual(myClass.substructures[3].returnType, "String")
+        XCTAssertEqual(myClass.substructures[4].type, SwiftDeclarationKind.functionMethodInstance)
+        XCTAssertEqual(myClass.substructures[4].name, "voidReturnType()")
+        XCTAssertNil(myClass.substructures[4].returnType)
 
         let myProtocol = structure.substructures[1]
         XCTAssertEqual(myProtocol.type, SwiftDeclarationKind.protocol)
