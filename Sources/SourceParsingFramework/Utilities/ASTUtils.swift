@@ -100,8 +100,11 @@ public extension Structure {
     }
 
     /// The return type of a property of method.
-    public var returnType: String {
-        return dictionary["key.typename"] as! String
+    public var returnType: String? {
+        if let value = dictionary["key.typename"] as? String {
+            return value
+        }
+        return nil
     }
 
     /// The unique set of expression call types in this structure.
