@@ -63,7 +63,7 @@ public class ProcessUtilitiesImpl: ProcessUtilities {
     /// process.
     /// - returns: The standard output content as a single `String` and
     /// the standard error content as a single `String`.
-    func execute(path: String = "/bin", processName: String, withArguments arguments: [String] = []) -> (output: String, error: String) {
+    public func execute(path: String = "/bin", processName: String, withArguments arguments: [String] = []) -> (output: String, error: String) {
         let justName = processName.starts(with: "/") ? String(processName.suffix(from: processName.index(processName.startIndex, offsetBy: 1))) : processName
         let justPath = path.hasSuffix("/") ? path : path + "/"
         

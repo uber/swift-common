@@ -106,7 +106,7 @@ public extension Sequence where Element: Hashable {
     /// - parameter set: The set to check against.
     /// - returns: `true` if at least one of the elements in this sequence
     /// is in the given set. `false` otherwise.
-    func isAnyElement(in set: Set<Element>) -> Bool {
+    public func isAnyElement(in set: Set<Element>) -> Bool {
         for e in self {
             if set.contains(e) {
                 return true

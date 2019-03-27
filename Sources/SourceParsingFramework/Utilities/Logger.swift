@@ -100,13 +100,13 @@ private func log(_ message: String, atLevel level: LoggingLevel) {
 // MARK: - Unit Test
 
 /// A logger that accumulates log messages to support unit testing.
-class UnitTestLogger {
+public class UnitTestLogger {
 
     /// The singleton instance.
-    static let instance = UnitTestLogger()
+    public static let instance = UnitTestLogger()
 
     /// The current set of logged messages.
-    var messages: [String] {
+    public var messages: [String] {
         return lockedMessages.values
     }
 
