@@ -29,6 +29,17 @@ public protocol ProcessUtilities {
     /// - parameter processName: The name of the process to kill.
     /// - returns: `true` if succeeded. `false` otherwise.
     func killAll(_ processName: String) -> Bool
+
+    /// Execute the given process with given arguments and return the
+    /// standard output as a `String`.
+    ///
+    /// - parameter path: The path to the process to execute.
+    /// - parameter process: The name of the process to execute.
+    /// - parameter arguments: The list of arguments to supply to the
+    /// process.
+    /// - returns: The standard output content as a single `String` and
+    /// the standard error content as a single `String`.
+    func execute(path: String, processName: String, withArguments arguments: [String]) -> (output: String, error: String)
 }
 
 /// A set of utility functions for running processes.
@@ -63,7 +74,7 @@ public class ProcessUtilitiesImpl: ProcessUtilities {
     /// process.
     /// - returns: The standard output content as a single `String` and
     /// the standard error content as a single `String`.
-    func execute(path: String = "/bin", processName: String, withArguments arguments: [String] = []) -> (output: String, error: String) {
+    public func execute(path: String = "/bin", processName: String, withArguments arguments: [String] = []) -> (output: String, error: String) {
         let justName = processName.starts(with: "/") ? String(processName.suffix(from: processName.index(processName.startIndex, offsetBy: 1))) : processName
         let justPath = path.hasSuffix("/") ? path : path + "/"
         
