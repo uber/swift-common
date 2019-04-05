@@ -55,5 +55,12 @@ $ swift test
 
 Or you can follow the steps above to generate a Xcode project and run tests within Xcode.
 
+## Related projects
+
+If you like Needle, check out other related open source projects from our team:
+- [Needle](https://github.com/uber/needle): a compile-time safe Swift dependency injection framework.
+- [Swift Abstract Class](https://github.com/uber/swift-abstract-class): a light-weight library along with an executable that enables compile-time safe abstract class development for Swift projects.
+- [Swift Concurrency](https://github.com/uber/swift-concurrency): a set of concurrency utility classes used by Uber, inspired by the equivalent [java.util.concurrent](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html) package classes.
+
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fuber%2Fswift-concurrency.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fuber%2Fswift-concurrency?ref=badge_large)
