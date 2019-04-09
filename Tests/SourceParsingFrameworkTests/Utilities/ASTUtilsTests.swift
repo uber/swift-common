@@ -85,6 +85,23 @@ class ASTUtilsTests: AbstractSourceParsingTests {
         XCTAssertEqual(myGlobalVar.name, "globalVar")
     }
 
+    func test_isOverride_verifyResults() {
+        let structure = self.structure(for: "Attributes.swift")
+
+        let childClass = structure.substructures[0]
+        XCTAssertEqual(childClass.substructures[0].name, "a")
+        XCTAssertFalse(childClass.substructures[0].isOverride)
+
+        XCTAssertEqual(childClass.substructures[1].name, "myOtherProperty")
+        XCTAssertTrue(childClass.substructures[1].isOverride)
+
+        XCTAssertEqual(childClass.substructures[3].name, "myMethod(_:arg2:_:)")
+        XCTAssertTrue(childClass.substructures[3].isOverride)
+
+        XCTAssertEqual(childClass.substructures[4].name, "voidReturnType()")
+        XCTAssertFalse(childClass.substructures[4].isOverride)
+    }
+
     private func structure(for fileName: String) -> Structure {
         let fileUrl = fixtureUrl(for: fileName)
         let content = try! String(contentsOf: fileUrl)

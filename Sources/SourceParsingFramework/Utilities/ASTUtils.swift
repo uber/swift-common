@@ -99,6 +99,22 @@ public extension Structure {
         return kindString == "source.lang.swift.expr.call"
     }
 
+    /// Check if this structure has the override attribute.
+    public var isOverride: Bool {
+        guard let attributes = dictionary["key.attributes"] as? [SourceKitRepresentable] else {
+            return false
+        }
+        for item in attributes {
+            guard let attribute = item as? [String: SourceKitRepresentable], let attributeValue = attribute["key.attribute"] as? String else {
+                continue
+            }
+            if attributeValue == SwiftDeclarationAttributeKind.override.rawValue {
+                return true
+            }
+        }
+        return false
+    }
+
     /// The return type of a property of method.
     public var returnType: String? {
         if let value = dictionary["key.typename"] as? String {
