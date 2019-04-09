@@ -117,11 +117,27 @@ public extension Structure {
         return Array(set).sorted()
     }
 
-    /// The name of the inherited types of this structure.
+    /// The inherited types of this structure.
+    ///
+    /// - note: This may contain generic types such as Class<Foo>.
     public var inheritedTypes: [String] {
         let types = dictionary["key.inheritedtypes"] as? [SourceKitRepresentable] ?? []
         return types.compactMap { (item: SourceKitRepresentable) -> String? in
             ((item as? [String: String])?["key.name"])?.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "")
+        }
+    }
+
+    /// The names of inherited types of this structure.
+    ///
+    /// - note: This property does not include any generic type
+    /// information.
+    public var inheritedTypeNames: [String] {
+        return inheritedTypes.map { (type: String) -> String in
+            if let index = type.firstIndex(of: "<") {
+                return String(type.prefix(upTo: index))
+            } else {
+                return type
+            }
         }
     }
 
