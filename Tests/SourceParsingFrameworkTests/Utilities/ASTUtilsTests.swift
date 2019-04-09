@@ -34,6 +34,20 @@ class ASTUtilsTests: AbstractSourceParsingTests {
         XCTAssertEqual(types, ["SuperClass<Blah,Foo,Bar>"])
     }
 
+    func test_inheritedTypeNames_withSingleLine_verifyResult() {
+        let structure = self.structure(for: "SingleLineInheritedTypes.swift").substructures[0]
+        let types = structure.inheritedTypeNames
+
+        XCTAssertEqual(types, ["SuperClass"])
+    }
+
+    func test_inheritedTypeNames_withMultiLine_verifyResult() {
+        let structure = self.structure(for: "MultiLineInheritedTypes.swift").substructures[0]
+        let types = structure.inheritedTypeNames
+
+        XCTAssertEqual(types, ["SuperClass"])
+    }
+
     func test_type_name_returnType_verifyResults() {
         let structure = self.structure(for: "Types.swift")
 
