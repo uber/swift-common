@@ -18,7 +18,7 @@ import Basic
 import Foundation
 
 /// Utility String extensions.
-public extension String {
+extension String {
 
     /// The SHA256 value of this String.
     public var shortSHA256Value: String {
@@ -71,7 +71,7 @@ public extension String {
 }
 
 /// Utility URL extensions.
-public extension URL {
+extension URL {
 
     /// Initializer.
     ///
@@ -99,7 +99,7 @@ public extension URL {
 }
 
 /// Sequence extensions.
-public extension Sequence where Element: Hashable {
+extension Sequence where Element: Hashable {
 
     /// Checks if any elements of this sequence is in the given set.
     ///

@@ -19,7 +19,7 @@ import SourceKittenFramework
 
 /// Extension of SourceKitten `Structure` to provide easy access to a set
 /// of common AST properties.
-public extension Structure {
+extension Structure {
 
     /// The substructures of this structure.
     public var substructures: [Structure] {
