@@ -8,7 +8,7 @@ let package = Package(
         .library(name: "CommandFramework", targets: ["CommandFramework"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.23.0"),
+        .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.23.1"),
         .package(url: "https://github.com/apple/swift-package-manager.git", .branch("master")),
         .package(url: "https://github.com/uber/swift-concurrency.git", .upToNextMajor(from: "0.6.5")),
     ],
