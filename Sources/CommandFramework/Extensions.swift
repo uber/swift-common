@@ -15,9 +15,9 @@
 //
 
 import Foundation
-import Utility
+import SPMUtility
 
-public extension ArgumentParser.Result {
+extension ArgumentParser.Result {
 
     public func get(_ arg: OptionArgument<Int>, withDefault defaultValue: Double) -> Double {
         if let value = get(arg) {

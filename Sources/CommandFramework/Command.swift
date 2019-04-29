@@ -15,7 +15,7 @@
 //
 
 import Foundation
-import Utility
+import SPMUtility
 
 /// A specific Needle instruction to be executed based on a set of input
 /// arguments.
