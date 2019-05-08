@@ -25,6 +25,8 @@ public enum LoggingLevel: Int {
     case info
     /// The level that only includes warning logs.
     case warning
+    /// The level that indicates a fatal error has occurred.
+    case error
 
     /// An cute emoticon describing the log level.
     public var emoticon: String {
@@ -32,6 +34,7 @@ public enum LoggingLevel: Int {
         case .debug: return "🐞"
         case .info: return "📋"
         case .warning: return "❗️"
+        case .error: return "💩"
         }
     }
 
@@ -45,6 +48,7 @@ public enum LoggingLevel: Int {
         case "debug": return .debug
         case "info": return .info
         case "warning": return .warning
+        case "error": return .error
         default: return nil
         }
     }
@@ -85,6 +89,16 @@ public func info(_ message: String) {
 /// is set at or below the `warning` level.
 public func warning(_ message: String) {
     log(message, atLevel: .warning)
+}
+
+/// Log the given message at the `error` level and terminate.
+///
+/// - parameter message: The message to log.
+/// - note: The mesasge is only logged if the current `minLoggingOutputLevel`
+/// is set at or below the `error` level.
+public func error(_ message: String) {
+    log(message, atLevel: .error)
+    exit(1)
 }
 
 private func log(_ message: String, atLevel level: LoggingLevel) {
