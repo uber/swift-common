@@ -94,9 +94,11 @@ public func warning(_ message: String) {
 /// Log the given message at the `error` level and terminate.
 ///
 /// - parameter message: The message to log.
+/// - returns: `Never`.
 /// - note: The mesasge is only logged if the current `minLoggingOutputLevel`
 /// is set at or below the `error` level.
-public func error(_ message: String) {
+/// - note: This method terminates the program. It returns `Never`.
+public func error(_ message: String) -> Never {
     log(message, atLevel: .error)
     exit(1)
 }
