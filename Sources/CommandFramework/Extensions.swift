@@ -15,7 +15,7 @@
 //
 
 import Foundation
-import SPMUtility
+import Utility
 
 extension ArgumentParser.Result {
 
