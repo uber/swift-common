@@ -16,7 +16,7 @@
 
 import Foundation
 import SourceParsingFramework
-import SPMUtility
+import Utility
 
 /// The base class of all commands that perform a set of logic common
 /// to all commands.
