@@ -38,6 +38,16 @@ public enum LoggingLevel: Int {
         }
     }
 
+    /// A text description the log level.
+    public var text: String {
+        switch self {
+        case .debug: return "debug"
+        case .info: return "info"
+        case .warning: return "warning"
+        case .error: return "error"
+        }
+    }
+
     /// Retrieve the logging level based on the given String value.
     ///
     /// - parameter value: The `String` value to parse from.
@@ -67,49 +77,61 @@ public func set(minLoggingOutputLevel level: LoggingLevel) {
 /// Log the given message at the `debug` level.
 ///
 /// - parameter message: The message to log.
+/// - parameter path: The file path this error applies to
+///   (if specified, the log output changes to one that matches compiler error and can be parsed easily by build systems)
 /// - note: The mesasge is only logged if the current `minLoggingOutputLevel`
 /// is set at or below the `debug` level.
-public func debug(_ message: String) {
-    log(message, atLevel: .debug)
+public func debug(_ message: String, path: String? = nil) {
+    log(message, atLevel: .debug, path: path)
 }
 
 /// Log the given message at the `info` level.
 ///
 /// - parameter message: The message to log.
+/// - parameter path: The file path this error applies to
+///   (if specified, the log output changes to one that matches compiler error and can be parsed easily by build systems)
 /// - note: The mesasge is only logged if the current `minLoggingOutputLevel`
 /// is set at or below the `info` level.
-public func info(_ message: String) {
-    log(message, atLevel: .info)
+public func info(_ message: String, path: String? = nil) {
+    log(message, atLevel: .info, path: path)
 }
 
 /// Log the given message at the `warning` level.
 ///
 /// - parameter message: The message to log.
+/// - parameter path: The file path this error applies to
+///   (if specified, the log output changes to one that matches compiler error and can be parsed easily by build systems)
 /// - note: The mesasge is only logged if the current `minLoggingOutputLevel`
 /// is set at or below the `warning` level.
-public func warning(_ message: String) {
-    log(message, atLevel: .warning)
+public func warning(_ message: String, path: String? = nil) {
+    log(message, atLevel: .warning, path: path)
 }
 
 /// Log the given message at the `error` level and terminate.
 ///
 /// - parameter message: The message to log.
+/// - parameter path: The file path this error applies to
+///   (if specified, the log output changes to one that matches compiler error and can be parsed easily by build systems)
 /// - returns: `Never`.
 /// - note: The mesasge is only logged if the current `minLoggingOutputLevel`
 /// is set at or below the `error` level.
 /// - note: This method terminates the program. It returns `Never`.
-public func error(_ message: String) -> Never {
-    log(message, atLevel: .error)
+public func error(_ message: String, path: String? = nil) -> Never {
+    log(message, atLevel: .error, path: path)
     exit(1)
 }
 
-private func log(_ message: String, atLevel level: LoggingLevel) {
+private func log(_ message: String, atLevel level: LoggingLevel, path: String?) {
     #if DEBUG
         UnitTestLogger.instance.log(message, at: level)
     #endif
 
     if level.rawValue >= minLoggingOutputLevel.value {
-        print("\(level.emoticon) \(message)")
+        if let path = path {
+            print("\(path):1:1: \(level.text): \(message)")
+        } else {
+            print("\(level.text): \(level.emoticon) \(message)")
+        }
     }
 }
 
