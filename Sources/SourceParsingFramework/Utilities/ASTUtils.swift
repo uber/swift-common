@@ -38,7 +38,7 @@ extension Structure {
     /// The type name of this structure.
     public var name: String {
         /// The type name of this structure.
-        return dictionary["key.name"] as! String
+        return dictionary["key.name"] as? String ?? ""
     }
 
     /// The type of this structure.
