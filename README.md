@@ -30,7 +30,7 @@ Since Uber's Swift open source projects use [Swift Package Manager](https://gith
 First fetch the dependencies:
 
 ```bash
-$ swift package fetch
+$ swift package resolve
 ```
 
 You can then build from the command-line:
