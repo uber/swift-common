@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-import Basic
+import TSCBasic
 import Foundation
 
 /// Utility String extensions.
