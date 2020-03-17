@@ -15,7 +15,7 @@
 //
 
 import Foundation
-import Utility
+import TSCUtility
 
 extension ArgumentParser.Result {
 
