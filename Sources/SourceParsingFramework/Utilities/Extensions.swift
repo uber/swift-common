@@ -22,7 +22,7 @@ extension String {
 
     /// The SHA256 value of this String.
     public var shortSHA256Value: String {
-        return SHA256(self).digestString().substring(with: NSRange(location: 0, length: 20))!
+        return SHA256().hash(self).hexadecimalRepresentation.substring(with: NSRange(location: 0, length: 20))!
     }
 
     /// Return the same String with the first character lowercased.
