@@ -30,6 +30,12 @@ class ExtensionsTests: AbstractSourceParsingTests {
         dirPath = String(filePath.prefix(upTo: index))
     }
 
+    func test_sha256_verifyResults() {
+        let input = "Some random string"
+        let sha256 = input.shortSHA256Value
+        XCTAssertEqual(sha256, "7e2ab276842ae9fb52ae")
+    }
+
     func test_isDirectory_verifyResults() {
         XCTAssertFalse(filePath.isDirectory)
         XCTAssertTrue(dirPath.isDirectory)
