@@ -16,7 +16,7 @@ let package = Package(
         .target(
             name: "SourceParsingFramework",
             dependencies: [
-                "SwiftToolsSupport",
+                "SwiftToolsSupport-auto",
                 "Concurrency",
                 "SourceKittenFramework",
             ]),
@@ -29,7 +29,7 @@ let package = Package(
         .target(
             name: "CommandFramework",
             dependencies: [
-                "SwiftToolsSupport",
+                "SwiftToolsSupport-auto",
                 "SourceParsingFramework",
             ]),
     ],
