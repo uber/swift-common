@@ -8,7 +8,6 @@ let package = Package(
         .library(name: "CommandFramework", targets: ["CommandFramework"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/jpsim/SourceKitten.git", from: "0.23.1"),
         .package(url: "https://github.com/apple/swift-tools-support-core.git", .upToNextMajor(from: "0.0.1")),
         .package(url: "https://github.com/uber/swift-concurrency.git", .upToNextMajor(from: "0.6.5")),
     ],
@@ -18,7 +17,6 @@ let package = Package(
             dependencies: [
                 "SwiftToolsSupport-auto",
                 "Concurrency",
-                "SourceKittenFramework",
             ]),
         .testTarget(
             name: "SourceParsingFrameworkTests",
