@@ -15,7 +15,6 @@
 //
 
 import XCTest
-@testable import SourceKittenFramework
 
 class ExtensionsTests: AbstractSourceParsingTests {
 
